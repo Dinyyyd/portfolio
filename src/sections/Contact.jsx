@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import emailjs from '@emailjs/browser'
 import ResumeDownload from '../components/ResumeDownload.jsx'
 
+const BASE_URL = import.meta.env.BASE_URL
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -76,7 +78,7 @@ const Contact = () => {
                 title="Connect on LinkedIn"
               >
                 <img 
-                  src="/assets/socials/linkedIn.svg" 
+                  src={`${BASE_URL}assets/socials/linkedIn.svg`}
                   alt="LinkedIn" 
                   className="w-5 h-5"
                 />

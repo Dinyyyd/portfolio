@@ -1,11 +1,13 @@
 import React from 'react'
 
+const BASE_URL = import.meta.env.BASE_URL
+
 const ResumeDownload = () => {
   const handleDownload = () => {
     // Create a link element and trigger download
     // You'll need to add your actual resume PDF to public/assets/resume.pdf
     const link = document.createElement('a')
-    link.href = '/assets/resume.pdf'
+    link.href = `${BASE_URL}assets/resume.pdf`
     link.download = 'Dinithi_Yasasvi_Dahanayake_Resume.pdf'
     document.body.appendChild(link)
     link.click()
