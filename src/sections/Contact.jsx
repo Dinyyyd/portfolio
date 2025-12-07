@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import emailjs from '@emailjs/browser'
 import ResumeDownload from '../components/ResumeDownload.jsx'
 
+const BASE_URL = import.meta.env.BASE_URL
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -26,6 +28,16 @@ const Contact = () => {
     const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
     const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
+
+    // Check if EmailJS is configured
+    if (serviceId === 'YOUR_SERVICE_ID' || templateId === 'YOUR_TEMPLATE_ID' || publicKey === 'YOUR_PUBLIC_KEY') {
+      // EmailJS not configured - fallback to mailto link
+      setIsSubmitting(false)
+      const subject = encodeURIComponent('Portfolio Contact Form')
+      const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)
+      window.location.href = `mailto:dinithi.y3@gmail.com?subject=${subject}&body=${body}`
+      return
+    }
 
     // Template parameters - these will be sent to your Gmail
     const templateParams = {
@@ -76,7 +88,7 @@ const Contact = () => {
                 title="Connect on LinkedIn"
               >
                 <img 
-                  src="/assets/socials/linkedIn.svg" 
+                  src={`${BASE_URL}assets/socials/linkedIn.svg`}
                   alt="LinkedIn" 
                   className="w-5 h-5"
                 />
